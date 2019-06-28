@@ -10,7 +10,7 @@ CREATE TABLE user (
     name varchar(100),
     address varchar(100),
     point int,
-    `position` varchar(50),
+    position varchar(50),
     PRIMARY KEY(id)
 );
 select * from user;
@@ -68,15 +68,7 @@ SELECT * FROM product;
 SELECT * FROM bookmark;
 
 INSERT INTO USER
-VALUES('hyeri', md5('1059'), '전혜리', '수원시 권선구', 0,'staff');
-INSERT INTO USER
-VALUES('adam', md5('0000'), '채아담', '인천광역시 연수구', 0,'customer');
-INSERT INTO USER
-VALUES('siyeon', md5('0000'), '권시연', '오산시 양산동', 0,'customer');
-INSERT INTO USER
-VALUES('heejeong', md5('0000'), '김희정', '오산시 양산동', 0,'customer');
-INSERT INTO USER
-VALUES('hyoseok', md5('1234'), '최효석', '오산시 양산동', 0,'customer');
+VALUES('dadmi97', md5('gmlwjd97'), 'heejeong','suwon', 0,'staff');
 
 
 INSERT INTO product
@@ -91,27 +83,14 @@ VALUES(3,'white dress', 48000, 'free', 'one_piece', 45, 480);
 INSERT INTO product
 VALUES(4,'bus handle earring', 9000, 'M', 'acc', 13, 90)
 ;
-insert into sale
-values(0, 2, '오산시 양산동', 'card', 'hyeri', '배송 준비중',33000);
-
-insert into sale
-values(0, 4, '수원시 권선구', 'cash', 'adam', '배송 완료',9000);
-
-insert into sale
-values(0, 1, '인천광역시 연수구', 'card', 'siyeon', '배송 준비중',22000);
-
-insert into sale
-values(0, 3, '오산시 양산동', 'card', 'hyeri', '배송 준비중',48000);
-
-insert into sale
-values(0, 3, '수원시 영통구', 'card','heejeong','배송 준비중',48000);
-insert into bookmark
-values(001, 'crop mtm', 1, 'adam');
 
 insert into bookmark
-values(002, 'bus handle earring', 4, 'adam');
+values(001, 'crop mtm', 1, 'dadmi97');
 
 insert into bookmark
-values(003, 'white dress', 3, 'hyeri');
+values(002, 'bus handle earring', 4, 'dadmi97');
+
+insert into bookmark
+values(003, 'white dress', 3, 'dadmi97');
 
 SELECT * FROM sale;
