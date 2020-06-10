@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"
-	import="java.util.*, yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*, com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
+    <%@include file="jstl.jsp"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,4 +19,5 @@
 <link href="/yourcloset/static/css/shop-homepage.css" rel="stylesheet">
 
 </head>
-</html>
+
+<%@include file="nav.jsp" %>

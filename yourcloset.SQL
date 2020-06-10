@@ -1,96 +1,67 @@
 DROP DATABASE IF EXISTS  yourcloset;
-CREATE DATABASE yourcloset DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE yourcloset DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 USE yourcloset;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
-	id varchar(100),
+	id varchar(100) primary key,
     pw varchar(100),
     name varchar(100),
     address varchar(100),
-    point int,
-    position varchar(50),
-    PRIMARY KEY(id)
+    point int default 0,
+    position varchar(10)
 );
-select * from user;
 
 DROP TABLE IF EXISTS product;
 CREATE TABLE product (
-	pid int AUTO_INCREMENT,
-	pname varchar(100),
-    price int,
+	pid int AUTO_INCREMENT primary key,
+	pname varchar(100) not null,
+    price int not null,
     size varchar(100),
-    category varchar(100),
-    stock int,
-    point int,
-    PRIMARY KEY(pid)
+    category varchar(100) not null,
+    stock int not null default 0,
+    point int
 );
 
-select * FROM product;
-DROP TABLE IF EXISTS sale;
-CREATE TABLE sale (
-	oid int AUTO_INCREMENT,
-    pid int,
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+	order_id int AUTO_INCREMENT primary key,
+    product_id int,
+    order_time datetime,
     address varchar(100),
     payment varchar(100),
-    userid varchar(100),
+    user_id varchar(100),
     delivery varchar(100),
-    price int,
-    PRIMARY KEY(oid)
+    price int
 );
 
 DROP TABLE IF EXISTS bookmark;
 CREATE TABLE bookmark (
-	bid int,
-    pname varchar(100),
-    pid int,
-    userid varchar(100),
-    PRIMARY KEY(bid)
+	bookmark_id int auto_increment primary key,
+    product_id int,
+    user_id varchar(100),
+    foreign key(user_id) references user(id) on delete cascade,
+    foreign key(product_id) references product(pid) on delete cascade
 );
 
-SHOW TABLES;
-
-SELECT * FROM user;
-
-SELECT * FROM product;
-
-DESC sale;
-
-SELECT * FROM sale s, product p WHERE s.pid = p.pid AND userid = 'jhr';
-
-SELECT * FROM product;
-
-UPDATE product SET stock = stock -1 WHERE pid = 1;
-
-SELECT * FROM product;
-
-SELECT * FROM bookmark;
-
-INSERT INTO USER
+INSERT INTO user
 VALUES('dadmi97', md5('gmlwjd97'), 'heejeong','suwon', 0,'staff');
 
+INSERT INTO product
+VALUES('crop mtm', 22000, 'free', 'top', 25, 220);
 
 INSERT INTO product
-VALUES(1,'crop mtm', 22000, 'free', 'top', 25, 220);
+VALUES('denim pants', 33000, 'S', 'bottom', 14, 330);
 
 INSERT INTO product
-VALUES(2,'denim pants', 33000, 'S', 'bottom', 14, 330);
+VALUES('white dress', 48000, 'free', 'one_piece', 45, 480);
 
 INSERT INTO product
-VALUES(3,'white dress', 48000, 'free', 'one_piece', 45, 480);
+VALUES('bus handle earring', 9000, 'M', 'acc', 13, 90);
 
-INSERT INTO product
-VALUES(4,'bus handle earring', 9000, 'M', 'acc', 13, 90)
-;
+insert into bookmark values(1, 'dadmi97');
+insert into bookmark values(4, 'dadmi97');
+insert into bookmark values(3, 'dadmi97');
 
-insert into bookmark
-values(001, 'crop mtm', 1, 'dadmi97');
-
-insert into bookmark
-values(002, 'bus handle earring', 4, 'dadmi97');
-
-insert into bookmark
-values(003, 'white dress', 3, 'dadmi97');
-
-SELECT * FROM sale;
+SELECT * FROM orders;

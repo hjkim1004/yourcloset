@@ -49,7 +49,6 @@
 							</div>
 						</div>
 					</article>
-					<!-- gallery-wrap .end// -->
 				</aside>
 				<aside class="col-sm-7">
 					<article class="card-body p-5">
@@ -90,33 +89,23 @@
 										</label>
 									</dd>
 								</dl>
-								<!-- item-property .// -->
 							</div>
-							<!-- col.// -->
 						</div>
-						<!-- row.// -->
 						<hr>
 						<a href="payment.jsp" class="btn btn-lg btn-danger text-uppercase"> 바로구매하기 </a> 
 						<a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> 
 							<i class="fas fa-shopping-cart"></i> 즐겨찾기 추가
 						</a>
 					</article>
-					<!-- card-body.// -->
 				</aside>
-				<!-- col.// -->
 			</div>
-			<!-- row.// -->
 		</div>
-		<!-- card.// -->
-
 
 	</div>
-</div>
-	<!--container.//-->
 
 <div style="margin-top: 5em;"></div>
 <!-- Footer -->
-  <%@ include file="/main/footer.jsp" %>
+  <%@ include file="/common/footer.jsp" %>
 
 </body>
 </html>

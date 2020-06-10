@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="java.sql.*, yourclosetDAO.*, yourclosetDTO.*, yourcloset.util.MD5"%>
+	import="java.sql.*, yourclosetDAO.*, yourclosetDTO.*,com.yourcloset.utils.MD5"%>
 
 <%
 	response.setContentType("text/html; charset=euc-kr");

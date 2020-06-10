@@ -89,6 +89,6 @@
 	<div style="margin-top: 3em;"></div>
 </div>
 <!-- Footer -->
-<%@ include file="/main/footer.jsp"%>
+<%@ include file="/common/footer.jsp"%>
 </body>
 </html>

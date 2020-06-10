@@ -8,17 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import yourcloset.util.DBAgent;
+import com.yourcloset.utils.JdbcAgent;
+
 import yourclosetDTO.ProductDTO;
 import yourclosetDTO.SaleDTO;
 
 public class SaleDAO {
-	// »ç¿ëÀÚ ±â´É (ex: user oid¸¦ ÀÌ¿ëÇØ ¹è¼Û»óÅÂ È®ÀÎÇÏ±â -> user»ç¿ëÀÚÀÇ ±â´É, oid¸¦ ÀÌ¿ëÇØ ¹è¼Û»óÅÂ È®ÀÎÇÏ±â
-	
-	
-	// user oid¸¦ ÀÌ¿ëÇØ ¹è¼Û»óÅÂ È®ÀÎÇÏ±â
 	public String selectDeliveryByOrderId(int oid) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		
 		String sql = "select pid, delivery from sale where oid =?;";
 		int pid = 0;
@@ -32,7 +29,7 @@ public class SaleDAO {
 				pid = rs.getInt("pid");
 				delivery = rs.getString("delivery");
 			}
-			return "ÁÖ¹®¹øÈ£ = " + oid + ", »óÇ°¹øÈ£ = " + pid + ", ¹è¼Û»óÅÂ = " + delivery;
+			return "ï¿½Ö¹ï¿½ï¿½ï¿½È£ = " + oid + ", ï¿½ï¿½Ç°ï¿½ï¿½È£ = " + pid + ", ï¿½ï¿½Û»ï¿½ï¿½ï¿½ = " + delivery;
 		
 		} catch (SQLException e) {
 			agent.close();
@@ -44,7 +41,7 @@ public class SaleDAO {
 
 	}
 	public List<SaleDTO> selectSalesByDeliveryState(){
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "SELECT * FROM product p, sale s WHERE p.pid = s.pid";
 		try {
 			List<SaleDTO> salesList = new ArrayList<>();
@@ -73,9 +70,9 @@ public class SaleDAO {
 		}
 		return null;
 	}
-	// user uid¸¦ ÀÌ¿ëÇØ ±¸¸Å ¸ñ·Ï return
+	// user uidï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ return
 	public List<SaleDTO> selectSalesByUserId(String userId) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "SELECT * FROM product p, sale s WHERE p.pid = s.pid AND s.userid = ?";
 
 		try {
@@ -108,9 +105,9 @@ public class SaleDAO {
 		return null;
 	}
 
-	// user ÁÖ¹®¹øÈ£¿¡ µû¶ó product Á¦Ç° Á¤º¸ ¹Þ¾Æ¿À±â
+	// user ï¿½Ö¹ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ product ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 	public ProductDTO selectProductByOrderId(int orderId) { 
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		ProductDAO productDAO = new ProductDAO();
 		ProductDTO product = null;
 		String sql = "select pid from sale where oid = ?";
@@ -133,9 +130,9 @@ public class SaleDAO {
 
 	}
 
-	// user ±¸¸Å Ãß°¡
+	// user ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public int insertSale(SaleDTO sale) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "INSERT INTO sale(pid,address,payment,userid,delivery,price) VALUES (?,?,?,?,?,?);";
 
 		try {
@@ -157,9 +154,9 @@ public class SaleDAO {
 		}
 	}
 
-	// user ±¸¸Å Ãë¼Ò
+	// user ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int deleteSale(int oid) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "delete from sale where oid = "+oid+";";
 		try {
 			Statement stmt = agent.getCon().createStatement();
@@ -175,9 +172,9 @@ public class SaleDAO {
 
 	}
 	
-	// staff ¹è¼Û »óÅÂ ¼öÁ¤
+	// staff ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateDeliveryStatus(int oid, String value) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "update sale set delivery = ? where oid= ?;";
 		try {
 			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
@@ -192,15 +189,15 @@ public class SaleDAO {
 		
 	}
 
-	// ÆÇ¸Å ÇöÈ²
+	// ï¿½Ç¸ï¿½ ï¿½ï¿½È²
 	public HashMap<Integer, Integer> selectSalesStatus() {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "select pid, count(oid) from sale group by pid;";
 		HashMap<Integer, Integer> status = new HashMap<>();
 		try {
 			Statement stmt = agent.getCon().createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			// Á¤º¸ °¡Á®¿À±â
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
 				int oidCnt = rs.getInt("count(oid)");
 				int pid = rs.getInt("pid");

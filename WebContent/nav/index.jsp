@@ -1,21 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*" %>
+	import="com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
 <%@ include file="header.jsp"%>
-<%
-	if(session != null){
-		session.invalidate();
-	}
-%>
+
 <div class="container">
 
 	<div class="row">
 
-		<div class="col-lg-3">
+		<%@ include file="/common/menu.jsp"%>
 
-			<%@ include file="/main/menuList.jsp"%>
-
-		</div>
 		<!-- /.col-lg-3 -->
 
 		<div class="col-lg-9">
@@ -60,40 +53,40 @@
 
 				<%
 					ProductDAO product = new ProductDAO();
-					List<ProductDTO> productlist = product.selectProductAll();
+				List<ProductDTO> productlist = product.selectProductsAll();
 
-					for (ProductDTO p : productlist) {
+				for (ProductDTO p : productlist) {
 				%>
 				<div class="col-lg-4 col-md-6 mb-4">
 					<div class="card h-100">
-						<%
-							out.print("<a href='#'><img class=\"card-img-top\" src=\"/yourcloset/static/img/" + p.getPid()
-										+ ".jpg\" alt=\"\"></a>");
-								out.print(" <div class=\"card-body\"><h4 class=\"card-title\">");
-								out.print("<a href='#'>" + p.getPname() + "</a></h4>");
-								out.print("<h5>" + p.getPrice() + "</h5>");
-						%>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">&#9733; &#9733; &#9733; &#9733;
-							&#9734;</small>
+						<a href='#'><img class="card-img-top"
+							src="/yourcloset/static/img/<%=p.getPid()%>.jpg" alt="\"></a>
+						<div class="card-body">
+							<h4 class="card-title">
+								<a href='#'>" + p.getPname() + "</a>
+							</h4>
+							<h5><%=p.getPrice()%></h5>
+						</div>
+						<div class="card-footer">
+							<small class="text-muted">&#9733; &#9733; &#9733; &#9733;
+								&#9734;</small>
+						</div>
 					</div>
 				</div>
+				<br>
+				<%
+					}
+				%>
+
 			</div>
-			<br>
-			<%
-				}
-			%>
+			<!-- /.row -->
 
 		</div>
-		<!-- /.row -->
+		<!-- /.col-lg-9 -->
 
 	</div>
-	<!-- /.col-lg-9 -->
-
+	<!-- /.row -->
 </div>
-<!-- /.row -->
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="/yourcloset/static/vendor/jquery/jquery.min.js"></script>

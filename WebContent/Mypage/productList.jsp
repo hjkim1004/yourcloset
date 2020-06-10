@@ -29,7 +29,7 @@
 
 								<%
 									ProductDAO product = new ProductDAO();
-									List<ProductDTO> productlist = product.selectProductAll();
+									List<ProductDTO> productlist = product.selectProductsAll();
 
 									for (ProductDTO p : productlist) {
 										out.print("<tr>");

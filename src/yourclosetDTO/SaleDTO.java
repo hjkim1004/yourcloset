@@ -1,22 +1,22 @@
 package yourclosetDTO;
 
 public class SaleDTO {
-	private int oId;			// ÆÇ¸Å³»¿ª °íÀ¯¹øÈ£
-	private int pid;			// »óÇ°¹øÈ£
-	private String address;		// User ÁÖ¼Ò
-	private String payment;		// °áÁ¦ ¹æ½Ä - card, cash
+	private int oId;
+	private int pid;
+	private String address;		// User ï¿½Ö¼ï¿½
+	private String payment;		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ - card, cash
 	private String userId;		// User ID
-	private String delivery="N"; // ¹è´Þ ¹æ½Ä - default : N 	
+	private String delivery="N"; // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ - default : N 	
 	private int price;
 	
-	public SaleDTO() {} // default »ý¼ºÀÚ 
+	public SaleDTO() {} // default ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	public SaleDTO(int pid, String userId, String address, String payment) {
 		this.pid = pid;
 		this.address = address;
 		this.payment = payment;
 		this.userId = userId;
 	}
-	public SaleDTO(int pid, String userId, String address, String payment, int price) { // ±¸¸ÅÇÑ °¡°Ý Æ÷ÇÔ
+	public SaleDTO(int pid, String userId, String address, String payment, int price) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		this(pid, userId, address, payment);
 		this.price = price;
 	}
@@ -38,11 +38,11 @@ public class SaleDTO {
 	
 	@Override
 	public String toString() {
-		return "ÁÖ¹® [ÆÇ¸Å ¹øÈ£ = " + oId + ", ÁÖ¹®ÀÚ ID = "+userId+ ", »óÇ°¹øÈ£ = " + pid + ", ¹ÞÀ¸½Ç ÁÖ¼Ò = " + address
-				+ ", ±¸¸Å °¡°Ý = " + price+", ÁöºÒ ¹æ½Ä = " + payment + "]";
+		return "ï¿½Ö¹ï¿½ [ï¿½Ç¸ï¿½ ï¿½ï¿½È£ = " + oId + ", ï¿½Ö¹ï¿½ï¿½ï¿½ ID = "+userId+ ", ï¿½ï¿½Ç°ï¿½ï¿½È£ = " + pid + ", ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ = " + address
+				+ ", ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ = " + price+", ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ = " + payment + "]";
 	}
 	public String toStaff() {
-		return "ÁÖ¹® [ÆÇ¸Å ¹øÈ£ = " + oId + ", ÁÖ¹®ÀÚ ID = "+userId+ ", »óÇ°¹øÈ£ = " + pid + ", ¹è¼Û»óÅÂ = "+delivery+"]";
+		return "ï¿½Ö¹ï¿½ [ï¿½Ç¸ï¿½ ï¿½ï¿½È£ = " + oId + ", ï¿½Ö¹ï¿½ï¿½ï¿½ ID = "+userId+ ", ï¿½ï¿½Ç°ï¿½ï¿½È£ = " + pid + ", ï¿½ï¿½Û»ï¿½ï¿½ï¿½ = "+delivery+"]";
 	}
 	
 	public int getoId() {

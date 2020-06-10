@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	import="java.util.*, java.sql.*, yourclosetDTO.*, yourclosetDAO.*, yourcloset.util.*"%>
+	import="java.util.*, java.sql.*, yourclosetDTO.*, yourclosetDAO.*, com.yourcloset.utils.*"%>
 
 <!DOCTYPE html>
 <html>

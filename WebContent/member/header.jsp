@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="java.util.*, yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*"%>
+	import="java.util.*, com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
 
 <!-- 여기서 멤버 세션 관리 -->
 <%
 	UserDTO user = (UserDTO) session.getAttribute("user");
 %>
-<%@ include file="/main/header.jsp"%>
+<%@ include file="/common/header.jsp"%>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top">

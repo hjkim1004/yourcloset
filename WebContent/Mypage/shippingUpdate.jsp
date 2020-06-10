@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="java.util.*, yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*"%>
+	import="java.util.*, com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
 <%
 	SaleDAO dao = new SaleDAO();
 	String ready = (String) request.getAttribute("ready");

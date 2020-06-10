@@ -4,16 +4,15 @@
 <html>
 <body>
 	<!-- Navigation -->
-	<%@ include file="header.jsp"%>
-
+	<%@ include file="/common/header.jsp"%>
 	<div class="team-section padding80">
 		<div class="container">
 			<div class="row text-center">
 				<div class="col-md-12">
 					<div class="sec-title">
-						<br/>
+						<br />
 						<h2>CLOTHES EXPLORER</h2>
-						<br/>
+						<br />
 
 					</div>
 					<div class="divider-line text-center"></div>
@@ -89,5 +88,5 @@
 	</div>
 	<div style="margin-top: 3em;"></div>
 	<!-- Footer -->
-	<%@ include file="/main/footer.jsp"%>
+	<%@ include file="/common/footer.jsp"%>
 </html>

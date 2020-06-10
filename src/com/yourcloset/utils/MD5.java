@@ -1,16 +1,10 @@
-package yourcloset.util;
+package com.yourcloset.utils;
 
-/*
- * MD5 Class : Message Digest 암호화 클래스
- */
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
-	public MD5() {
-	}
-
-	public static String getMd5(String str) {
+	public static String getMD5(String str) {
 		String md5 = "";
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

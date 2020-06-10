@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="java.util.*, java.sql.*, yourclosetDTO.*, yourclosetDAO.*, yourcloset.util.*"%>
+	pageEncoding="EUC-KR" import="java.util.*, java.sql.*, yourclosetDTO.*, yourclosetDAO.*, com.yourcloset.utils.*"%>
 
    <!-- Navigation -->
 	<% 
@@ -16,11 +16,8 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-lg-3">
-
-        <%@ include file="/main/menuList.jsp" %>
-
-      </div>
+      <%@ include file="/common/menu.jsp" %>
+      
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
@@ -36,7 +33,7 @@
 
           <%
 		ProductDAO product = new ProductDAO();
-		List<ProductDTO> productlist = product.selectProductByCategory("bottom");
+		List<ProductDTO> productlist = product.selectProductsByCategory("bottom");
 		
 		  for (ProductDTO p : productlist) { 
 %>
@@ -71,7 +68,7 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <%@ include file="/main/footer.jsp" %>
+  <%@ include file="/common/footer.jsp" %>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/yourcloset/static/vendor/jquery/jquery.min.js"></script>

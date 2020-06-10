@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="java.util.*, yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*"%>
+	import="java.util.*, com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
 
 <%@ include file="header.jsp"%>
 <body>
@@ -11,7 +11,7 @@
 
 			<div class="col-lg-3">
 
-				<%@ include file="/main/menuList.jsp"%>
+				<%@ include file="/common/menu.jsp"%>
 
 			</div>
 			<!-- /.col-lg-3 -->
@@ -58,7 +58,7 @@
 
 					<%
 						ProductDAO product = new ProductDAO();
-						List<ProductDTO> productlist = product.selectProductAll();
+						List<ProductDTO> productlist = product.selectProductsAll();
 
 						for (ProductDTO p : productlist) {
 					%>

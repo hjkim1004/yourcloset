@@ -1,16 +1,15 @@
 package yourclosetDTO;
 
 public class ProductDTO {
-	private int pid; // »óÇ°¹øÈ£
-	private String pname; // »óÇ°¸í
-	private int price; // »óÇ° °¡°Ý
-	private String size; // »óÇ° »çÀÌÁî
-	private String category; // Ä«Å×°í¸®
-	private int stock; // ¹°Ç° ¼ö·®
+	private int pid;
+	private String pname;
+	private int price;
+	private String size;
+	private String category;
+	private int stock;
 	private int point;
 
-	public ProductDTO() {
-	} // default »ý¼ºÀÚ
+	public ProductDTO() {}
 
 	public ProductDTO(String pname, int price, int pid) {
 		this.pname = pname;
@@ -34,8 +33,8 @@ public class ProductDTO {
 
 	@Override
 	public String toString() {
-		return " [ »óÇ° ¹øÈ£ = " + pid + ", »óÇ°¸í = " + pname + ", °¡°Ý = " + price + ", »çÀÌÁî = " + size + ", Ä«Å×°í¸® = " + category
-				+ ", Àç°í = " + stock + ", ±¸¸Å½Ã Àû¸³ Æ÷ÀÎÆ® = " + point + "]";
+		return " [ ï¿½ï¿½Ç° ï¿½ï¿½È£ = " + pid + ", ï¿½ï¿½Ç°ï¿½ï¿½ = " + pname + ", ï¿½ï¿½ï¿½ï¿½ = " + price + ", ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = " + size + ", Ä«ï¿½×°ï¿½ = " + category
+				+ ", ï¿½ï¿½ï¿½ = " + stock + ", ï¿½ï¿½ï¿½Å½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® = " + point + "]";
 	}
 
 	public int getPid() {

@@ -7,12 +7,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import yourcloset.util.DBAgent;
+import com.yourcloset.utils.JdbcAgent;
+
 import yourclosetDTO.UserDTO;
 
 public class UserDAO {
 	public boolean isUser(String userid) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		
 		String sql = "select id from user;";
 		Statement stmt;
@@ -32,7 +33,7 @@ public class UserDAO {
 		return false;
 	}
 	public String login(String userId, String password) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 
 		String sql = "SELECT id, md5(pw) FROM user WHERE id = ? AND pw = ?;";
 
@@ -59,7 +60,7 @@ public class UserDAO {
 
 	
 	public int SignUp(UserDTO user) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		
 		String sql = "INSERT INTO user(id,pw,name,address,point,position) VALUES( ? , ? , ? , ? , 0, ?)";
 		try {
@@ -81,7 +82,7 @@ public class UserDAO {
 	}
 
 	public String login(String userId, String password, String position) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		
 		String sql = "SELECT id, md5(pw) FROM user WHERE id = ? AND pw = ? AND position = ?";
 
@@ -107,7 +108,7 @@ public class UserDAO {
 		}
 	}
 	public UserDTO selectUserByUserId(String userId) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 
 		String sql = "SELECT id,pw,name,address,point,position FROM user WHERE id = ?";
 
@@ -118,7 +119,7 @@ public class UserDAO {
 			ResultSet rs = psmt.executeQuery();
 			UserDTO user = null;
 
-			// À¯ÀúÁ¤º¸ °¡Á®¿À±â
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
 
 				String id = rs.getString("id");
@@ -143,7 +144,7 @@ public class UserDAO {
 		}
 	}
 	public int updateUserInfo(String userid, String column, Object value) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		
 		String sql = "update user set "+column+" = ? where id=?;";
 		try {
@@ -161,8 +162,8 @@ public class UserDAO {
 	}
 
 	public List<UserDTO> selectAllUser(){
-		DBAgent agent = new DBAgent();
-		String sql = "SELECT id,pw,name,address,point FROM user where position='customer'"; // ¸Å°³º¯¼ö°¡ ¾øÀ¸¹Ç·Î Statement °´Ã¼·Î ¹Ù²Þ
+		JdbcAgent agent = new JdbcAgent();
+		String sql = "SELECT id,pw,name,address,point FROM user where position='customer'"; // ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ Statement ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ù²ï¿½
 
 		try {
 			Statement stmt = agent.getCon().createStatement();

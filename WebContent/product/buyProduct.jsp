@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="java.sql.*, yourclosetDAO.*, yourclosetDTO.*, yourcloset.util.MD5"%>
+	import="java.sql.*, yourclosetDAO.*, yourclosetDTO.*,com.yourcloset.utils.MD5"%>
 
 <%
 	// 회원가입 DB에 저장되는 부분
@@ -18,4 +18,4 @@
 	Sale = new SaleDTO();
 	SaleDAO.insertSale(Sale);
 %>
-<%@ include file="/nav/index.jsp"%>
+<%@ include file="/nav/index.jsp" %>

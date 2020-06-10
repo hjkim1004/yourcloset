@@ -15,7 +15,7 @@
 <body>
 
 	<!-- Navigation -->
-	<%@ include file="/main/header.jsp"%>
+	<%@ include file="/common/header.jsp"%>
 
 	<div class="container">
 

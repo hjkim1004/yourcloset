@@ -7,26 +7,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import yourcloset.util.DBAgent;
+import com.yourcloset.utils.JdbcAgent;
+
 import yourclosetDTO.ProductDTO;
 
 public class ProductDAO {
-	public ProductDAO() {} // defalt 객체 생성자
+	private JdbcAgent agent;
+	private String SelectProductsByCategory_SQL = "SELECT pname,price,pid FROM product WHERE category = ?";
+	private String SelectProductByPid_SQL = "SELECT pname,price,size,category,stock,point FROM product WHERE pid = ?";
+	private String SelectProductsAll_SQL = "SELECT * FROM product";
+	private String INSERT_SQL = "insert into product(pname, price, size, category, stock, point) values(?,?,?,?,?,?)";
+	private String DELETE_SQL = "delete from product where pid=?";
+	
+	public ProductDAO() {
+		agent = new JdbcAgent();
+	}
 
 	public ProductDTO selectProductByPid(int pid) {
-		DBAgent agent = new DBAgent();
-		String sql = "SELECT pname,price,size,category,stock,point FROM product WHERE pid = ?;";
+		ProductDTO product = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
 
 		try {
-			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
+			psmt = agent.getCon().prepareStatement(SelectProductByPid_SQL);
 			psmt.setInt(1, pid);
 
-			ResultSet rs = psmt.executeQuery();
-			ProductDTO product = null;
+			rs = psmt.executeQuery();
 
-			// 유저정보 가져오기
-			while (rs.next()) {
-
+			if (rs.next()) {
 				String pname = rs.getString("pname");
 				int price = rs.getInt("price");
 				String size = rs.getString("size");
@@ -36,56 +44,54 @@ public class ProductDAO {
 
 				product = new ProductDTO(pid, pname, price, size, category, stock, point);
 			}
-			return product;
-		} catch (Exception e) {
-			agent.close();
-			e.printStackTrace();
-			return null;
-		} finally {
-			agent.close();
+			rs.close();
+			psmt.close();
+
+		} catch (SQLException e) {
+			System.err.println("* Product Select Error");
 		}
+
+		return product;
 	}
-	
-	public List<ProductDTO> selectProductByCategory(String category) {
-		DBAgent agent = new DBAgent();
-		String sql = "SELECT pname,price,pid FROM product WHERE category = ?;";
+
+	public List<ProductDTO> selectProductsByCategory(String category) {
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<ProductDTO> productList = new ArrayList<>();
 
 		try {
-			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
+			psmt = agent.getCon().prepareStatement(SelectProductsByCategory_SQL);
 			psmt.setString(1, category);
 
-			ResultSet rs = psmt.executeQuery();
-			List<ProductDTO> productList = new ArrayList<>();
-			
-			// 유저정보 가져오기
+			rs = psmt.executeQuery();
+
 			while (rs.next()) {
 
 				String pname = rs.getString("pname");
 				int price = rs.getInt("price");
 				int pid = rs.getInt("pid");
-				
-				ProductDTO product = new ProductDTO(pname,price,pid);
+
+				ProductDTO product = new ProductDTO(pname, price, pid);
 				productList.add(product);
 			}
-			return productList;
-		} catch (Exception e) {
-			agent.close();
-			e.printStackTrace();
-			return null;
-		} finally {
-			agent.close();
+			rs.close();
+			psmt.close();
+		} 
+		catch (SQLException e) {
+			System.err.println("* Product Select Error");
 		}
+		return productList;
 	}
-	
-	public List<ProductDTO> selectProductAll(){
-		DBAgent agent = new DBAgent();
-		String sql = "SELECT * FROM product"; // 매개변수가 없으므로 Statement 객체로 바꿈
 
+	public List<ProductDTO> selectProductsAll() {
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<ProductDTO> product_list = new ArrayList<ProductDTO>();
+		
 		try {
-			Statement stmt = agent.getCon().createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = agent.getCon().createStatement();
+			rs = stmt.executeQuery(SelectProductsAll_SQL);
 
-			List<ProductDTO> productList = new ArrayList<>();
 			while (rs.next()) {
 
 				int pid = rs.getInt("pid");
@@ -95,26 +101,22 @@ public class ProductDAO {
 				String category = rs.getString("category");
 				int stock = rs.getInt("stock");
 				int point = rs.getInt("point");
-				
+
 				ProductDTO product = new ProductDTO(pid, pname, price, size, category, stock, point);
-				productList.add(product);
+				product_list.add(product);
 			}
-			return productList;
-		} catch (Exception e) {
-			agent.close();
-			e.printStackTrace();
-			return null;
-		} finally {
-				agent.close();
+		} catch (SQLException e) {
+			System.err.println("* Product Select Error");
 		}
+		return product_list;
 	}
 
 	public int insertProduct(ProductDTO product) {
-		DBAgent agent = new DBAgent();
-		String sql = "insert into product(pname, price, size, category, stock, point) values(?,?,?,?,?,?);";
-
+		PreparedStatement psmt = null;
+		int result = 0;
+		
 		try {
-			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
+			psmt = agent.getCon().prepareStatement(INSERT_SQL);
 			psmt.setString(1, product.getPname());
 			psmt.setInt(2, product.getPrice());
 			psmt.setString(3, product.getSize());
@@ -122,29 +124,27 @@ public class ProductDAO {
 			psmt.setInt(5, product.getStock());
 			psmt.setInt(6, product.getPoint());
 
-			return psmt.executeUpdate();
+			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			agent.close();
+			System.err.println("* Product Insert Error");
 		}
+		
+		return result;
 	}
-	
+
 	public int deleteProduct(int pid) {
-		DBAgent agent = new DBAgent();
-		String sql = "delete from product where pid=?;";
+		PreparedStatement psmt = null;
+		int result = 0;
+		
 		try {
-			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
+			psmt = agent.getCon().prepareStatement(DELETE_SQL);
 			psmt.setInt(1, pid);
-			return psmt.executeUpdate();
-			
+			result = psmt.executeUpdate();
+
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
+			System.err.println("* Product Delete Error");
 		}
-		
-		
+		return result;
 	}
 }

@@ -28,9 +28,9 @@
 							<img src="/yourcloset/static/img/about.png">
 						</div>
 						<div class="team-title">
-							<h3>±Ç½Ã¿¬</h3>
-							<h4>ÆÀÀå</h4>
-							<p>¼³°è ¹× JSP ÄÚµù</p>
+							<h3>ê¶Œì‹œì—°</h3>
+							<h4>íŒ€ìž¥</h4>
+							<p>ì„¤ê³„ ë° JSP ì½”ë”©</p>
 						</div>
 					</div>
 				</div>
@@ -40,9 +40,9 @@
 							<img src="/yourcloset/static/img/about.png">
 						</div>
 						<div class="team-title">
-							<h3>±èÈñÁ¤</h3>
-							<h4>ÆÀ¿ø</h4>
-							<p>JAVA ¹× JSP ÄÚµù</p>
+							<h3>ê¹€í¬ì •</h3>
+							<h4>íŒ€ì›</h4>
+							<p>JAVA ë° JSP ì½”ë”©</p>
 						</div>
 					</div>
 				</div>
@@ -52,9 +52,9 @@
 							<img src="/yourcloset/static/img/aboutM.png">
 						</div>
 						<div class="team-title">
-							<h3>ÃÖÈ¿¼®</h3>
-							<h4>ÆÀ¿ø</h4>
-							<p>JAVA ¹× JSP ÄÚµù</p>
+							<h3>ìµœíš¨ì„</h3>
+							<h4>íŒ€ì›</h4>
+							<p>JAVA ë° JSP ì½”ë”©</p>
 						</div>
 					</div>
 				</div>
@@ -65,9 +65,9 @@
 							<img src="/yourcloset/static/img/about.png">
 						</div>
 						<div class="team-title">
-							<h3>Ã¤¾Æ´ã</h3>
-							<h4>ÆÀ¿ø</h4>
-							<p>¹ßÇ¥ ¹× HTML È¨ÆäÀÌÁö ÀÛ¼º</p>
+							<h3>ì±„ì•„ë‹´</h3>
+							<h4>íŒ€ì›</h4>
+							<p>ë°œí‘œ ë° HTML í™ˆíŽ˜ì´ì§€ ìž‘ì„±</p>
 						</div>
 					</div>
 				</div>
@@ -77,9 +77,9 @@
 							<img src="/yourcloset/static/img/about.png">
 						</div>
 						<div class="team-title">
-							<h3>ÀüÇý¸®</h3>
-							<h4>ÆÀ¿ø</h4>
-							<p>¼³°è ¹× HTML È¨ÆäÀÌÁö ÀÛ¼º</p>
+							<h3>ì „í˜œë¦¬</h3>
+							<h4>íŒ€ì›</h4>
+							<p>ì„¤ê³„ ë° HTML í™ˆíŽ˜ì´ì§€ ìž‘ì„±</p>
 						</div>
 					</div>
 				</div>
@@ -89,5 +89,5 @@
 	</div>
 	<div style="margin-top: 3em;"></div>
 	<!-- Footer -->
-	<%@ include file="/main/footer.jsp"%>
+	<%@ include file="/common/footer.jsp"%>
 </html>

@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import yourcloset.util.DBAgent;
+import com.yourcloset.utils.JdbcAgent;
+
 import yourclosetDTO.BookMarkDTO;
 import yourclosetDTO.ProductDTO;
 import yourclosetDTO.UserDTO;
@@ -15,7 +16,7 @@ public class BookMarkDAO {
 	protected static int bid;
 	
 	static {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 
 		try {
 			PreparedStatement psmt = agent.getCon().prepareStatement("SELECT max(bid) AS `bid` FROM bookmark");
@@ -35,7 +36,7 @@ public class BookMarkDAO {
 	}
 	
 	public List<BookMarkDTO> selectBookMarkByUserId(String userId) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "SELECT * FROM bookmark WHERE userid = ?";
 
 		try {
@@ -63,7 +64,7 @@ public class BookMarkDAO {
 		}
 	}
 	public int insertBookMark(BookMarkDTO bookmark) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "insert into bookmark(pname, pid, userid) values(?,?,?);";
 		try {
 			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
@@ -82,7 +83,7 @@ public class BookMarkDAO {
 		}
 	}
 	public int deleteBookMark(int bid) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 		String sql = "delete from bookmark where bid =?;";
 		try {
 			PreparedStatement psmt = agent.getCon().prepareStatement(sql);
@@ -98,9 +99,9 @@ public class BookMarkDAO {
 		}
 	}
 
-	// ¾Æ·¡ µÑÀº YourClosetCustomer.javaÀÇ ºÏ¸¶Å© Ãß°¡ Á¦°Å¿¡ ¾²ÀÓ
+	// ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ YourClosetCustomer.javaï¿½ï¿½ ï¿½Ï¸ï¿½Å© ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int addBookmark(UserDTO user, ProductDTO product) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 
 		String sql = "INSERT INTO bookmark (bid, pname, pid, userid) VALUES (?, ?, ?, ?)";
 
@@ -123,7 +124,7 @@ public class BookMarkDAO {
 	}
 
 	public int deleteBookmark(int bid) {
-		DBAgent agent = new DBAgent();
+		JdbcAgent agent = new JdbcAgent();
 
 		String sql = "DELETE FROM bookmark WHERE bid = ?";
 

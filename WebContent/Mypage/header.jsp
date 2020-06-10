@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"
-	import="yourcloset.util.*, yourclosetDAO.*, yourclosetDTO.*"%>
+	import="com.yourcloset.utils.*, yourclosetDAO.*, yourclosetDTO.*"%>
 
 <%@ include file="/member/header.jsp"%>
 
