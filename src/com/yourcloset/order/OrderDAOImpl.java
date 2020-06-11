@@ -198,16 +198,17 @@ public class OrderDAOImpl implements OrderDAO {
 
 	// 상품 당 주문 건수
 	@Override
-	public HashMap<Integer, Integer> selectOrderStatus() {
-		HashMap<Integer, Integer> status = new HashMap<>();
+	public HashMap<ProductVO, Integer> selectOrderStatus() {
+		HashMap<ProductVO, Integer> status = new HashMap<>();
+		ProductDAO productDAO = new ProductDAOImpl();
 		
 		try {
 			stmt = agent.getCon().createStatement();
 			rs = stmt.executeQuery(SelectOrderStatus_SQL);
 			while (rs.next()) {
 				int cnt = rs.getInt("cnt");
-				int product_id = rs.getInt("product_id");
-				status.put(product_id, cnt);
+				ProductVO product = productDAO.selectProductByProductId(rs.getInt("product_id"));
+				status.put(product, cnt);
 			}
 		} catch (Exception e) {
 			System.err.println("* Order Select Error");

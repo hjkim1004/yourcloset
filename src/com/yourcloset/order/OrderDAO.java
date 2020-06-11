@@ -15,6 +15,6 @@ public interface OrderDAO {
 	int insertOrder(OrderVO order);
 	int deleteOrder(int order_id);
 	int updateDeliveryStatus(int order_id, String value);
-	HashMap<Integer, Integer> selectOrderStatus(); // 상품 당 주문 건수
+	HashMap<ProductVO, Integer> selectOrderStatus(); // 상품 당 주문 건수
 
 }
