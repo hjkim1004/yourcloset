@@ -3,8 +3,10 @@
     
 <%@include file="/common/header.jsp" %>
 <%
-	ProductVO product = (ProductVO) request.getAttribute("product");
-	pageContext.setAttribute("product", product);
+	ProductDAO productDAO = new ProductDAOImpl();
+	int id = Integer.parseInt(request.getParameter("pid"));
+	ProductVO product = productDAO.selectProductByProductId(id);
+	request.setAttribute("product", product);
 %>
 <head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -23,7 +25,7 @@
 						<div class="img-big-wrap">
 							<div>
 								<a href="#">
-								<img src="/static/img/${product.product_id}.jpg" width="420" style="margin-top: 1em; margin-left: 1em;"></a>
+								<img src="/yourcloset/static/img/${product.product_id}.jpg" width="420" style="margin-top: 1em; margin-left: 1em;"></a>
 							</div>
 						</div>
 					</article>
