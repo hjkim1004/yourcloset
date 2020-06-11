@@ -31,28 +31,28 @@
 						<div class="col-12">
 							<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
 								<li class="nav-item"><a class="nav-link active"
-									id="profile" data-toggle="tab" href="${path}/mypage/profileManager.jsp" role="tab"
+									id="profile" data-toggle="tab" href="${path}/manage/profileManager.jsp" role="tab"
 									aria-controls="Profile" aria-selected="true">My Page</a></li>
 								<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
 										id="customerlist" data-toggle="tab"
-										href="${path}/mypage/customList.jsp" role="tab"
+										href="${path}/manage/customerList.jsp" role="tab"
 										aria-controls=CustomerList " aria-selected="true">Customer
 											List</a></li>
 
 									<li class="nav-item"><a class="nav-link active"
 										id="saleslist" data-toggle="tab"
-										href="${path}/mypage/saleschart.jsp" role="tab"
-										aria-controls="SalesList" aria-selected="true">Sales List</a>
+										href="${path}/manage/salesChart.jsp" role="tab"
+										aria-controls="SalesList" aria-selected="true">Sales Chart</a>
 									</li>
 									<li class="nav-item"><a class="nav-link active"
 										id="shipping" data-toggle="tab"
-										href="${path}/mypage/shipping.jsp" role="tab"
+										href="${path}/manage/delivery.jsp" role="tab"
 										aria-controls="Shipping" aria-selected="true">Delivery
-											List</a></li>
+											Status</a></li>
 									<li class="nav-item"><a class="nav-link active"
 										id="productList" data-toggle="tab"
-										href="${path}/mypage/productList.jsp" role="tab"
+										href="${path}/manage/productList.jsp" role="tab"
 										aria-controls="ProductList" aria-selected="true">Product
 											List</a></li>
 								</ul>

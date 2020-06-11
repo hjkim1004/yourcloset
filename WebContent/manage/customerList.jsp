@@ -12,17 +12,17 @@ request.setAttribute("user_list", user_list);
 		<table class="table user-list">
 			<thead>
 				<tr>
-					<th><span>User Name</span></th>
 					<th><span>ID</span></th>
-					<th class="text-center"><span>Point</span></th>
+					<th><span>User Name</span></th>
+					<th><span>Point</span></th>
 					<th><span>Address</span></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="users" items="${user_list}">
 					<tr>
-						<td>${users.user_name}</td>
 						<td>${users.user_id}</td>
+						<td>${users.user_name}</td>
 						<td>${users.point}</td>
 						<td>${users.user_address }</td>
 					</tr>
