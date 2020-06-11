@@ -8,15 +8,16 @@ import java.util.List;
 
 import com.yourcloset.utils.JdbcAgent;
 
-public class BookmarkDAO {
+public class BookmarkDAOImpl implements BookmarkDAO {
 	private JdbcAgent agent = null;
 	private String INSERT_SQL = "insert into bookmark(pid, userid) values(?,?);";
 	private String SelectBookmarkByUserId_SQL = "SELECT * FROM bookmark WHERE userid = ? order by bookmark_id";
 	
-	public BookmarkDAO() {
+	public BookmarkDAOImpl() {
 		agent = new JdbcAgent();
 	}
 	
+	@Override
 	public List<BookmarkVO> selectBookmarkByUserId(String userId) {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -32,8 +33,8 @@ public class BookmarkDAO {
 				int pid = rs.getInt("product_id");
 				String uid = rs.getString("user_id");
 
-				BookmarkVO bookMark = new BookmarkVO(bid, pid, uid);
-				bookmark_list.add(bookMark);
+				BookmarkVO bookmark = new BookmarkVO(bid, pid, uid);
+				bookmark_list.add(bookmark);
 			}
 			
 			rs.close();
@@ -45,13 +46,14 @@ public class BookmarkDAO {
 		return bookmark_list;
 	}
 	
+	@Override
 	public int insertBookmark(BookmarkVO bookmark) {
 		PreparedStatement psmt = null;
 		int result = 0;
 		
 		try {
 			psmt = agent.getCon().prepareStatement(INSERT_SQL);
-			psmt.setInt(1, bookmark.getBookmark_id());
+			psmt.setInt(1, bookmark.getBookmarkId());
 			psmt.setString(2, bookmark.getUser_id());
 	
 			result = psmt.executeUpdate();
@@ -64,6 +66,7 @@ public class BookmarkDAO {
 	}
 	
 	
+	@Override
 	public int deleteBookmark(int bookmark_id) {
 		PreparedStatement psmt = null;
 		int result = 0;

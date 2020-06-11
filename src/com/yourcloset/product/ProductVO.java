@@ -1,24 +1,25 @@
 package com.yourcloset.product;
 
 public class ProductVO {
-	private int pid;
-	private String pname;
+	private int product_id;
+	private String product_name;
 	private int price;
 	private String size;
 	private String category;
 	private int stock;
 	private int point;
-
+	private String description;
+	
 	public ProductVO() {}
 
-	public ProductVO(String pname, int price, int pid) {
-		this.pname = pname;
+	public ProductVO(String product_name, int price, int product_id) {
+		this.product_name = product_name;
 		this.price = price;
-		this.pid = pid;
+		this.product_id = product_id;
 	}
 
-	public ProductVO(String pname, int price, String size, String category, int stock, int point) {
-		this.pname = pname;
+	public ProductVO(String product_name, int price, String size, String category, int stock, int point) {
+		this.product_name = product_name;
 		this.price = price;
 		this.size = size;
 		this.category = category;
@@ -26,32 +27,47 @@ public class ProductVO {
 		this.point = point;
 	}
 
-	public ProductVO(int pid, String pname, int price, String size, String category, int stock, int point) {
-		this(pname, price, size, category, stock, point);
-		this.pid = pid;
+	public ProductVO(int product_id, String product_name, int price, String size, String category, int stock, int point) {
+		this(product_name, price, size, category, stock, point);
+		this.product_id = product_id;
 	}
 	
-	
+
+	public ProductVO(int product_id, String product_name, int price, String size, String category, int stock, int point,
+			String description) {
+		this(product_id, product_name, price, size, category, stock, point);
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductVO [pid=" + pid + ", pname=" + pname + ", price=" + price + ", size=" + size + ", category="
-				+ category + ", stock=" + stock + ", point=" + point + "]";
+		return "ProductVO [product_id=" + product_id + ", product_name=" + product_name + ", price=" + price + ", size="
+				+ size + ", category=" + category + ", stock=" + stock + ", point=" + point + ", description="
+				+ description + "]";
 	}
 
-	public int getPid() {
-		return pid;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPid(int pid) {
-		this.pid = pid;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getPname() {
-		return pname;
+	public int getProduct_id() {
+		return product_id;
 	}
 
-	public void setPname(String pname) {
-		this.pname = pname;
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 
 	public int getPrice() {

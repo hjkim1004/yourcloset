@@ -11,37 +11,38 @@ import com.yourcloset.utils.JdbcAgent;
 
 public class ProductDAOImpl implements ProductDAO {
 	private JdbcAgent agent;
-	private String SelectProductsByCategory_SQL = "SELECT pname,price,pid FROM product WHERE category = ?";
-	private String SelectProductByPid_SQL = "SELECT pname,price,size,category,stock,point FROM product WHERE pid = ?";
+	private PreparedStatement psmt = null;
+	private ResultSet rs = null;
+	
+	private String SelectProductsByCategory_SQL = "SELECT * FROM product WHERE category = ?";
+	private String SelectProductByProductId_SQL = "SELECT * FROM product WHERE product_id = ?";
 	private String SelectProductsAll_SQL = "SELECT * FROM product";
-	private String INSERT_SQL = "insert into product(pname, price, size, category, stock, point) values(?,?,?,?,?,?)";
-	private String DELETE_SQL = "delete from product where pid=?";
+	private String INSERT_SQL = "insert into product(product_name, price, size, category, stock, point) values(?,?,?,?,?,?)";
+	private String DELETE_SQL = "delete from product where product_id=?";
 	
 	public ProductDAOImpl() {
 		agent = new JdbcAgent();
 	}
 
 	@Override
-	public ProductVO selectProductByPid(int pid) {
+	public ProductVO selectProductByProductId(int product_id) {
 		ProductVO product = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
 
 		try {
-			psmt = agent.getCon().prepareStatement(SelectProductByPid_SQL);
-			psmt.setInt(1, pid);
+			psmt = agent.getCon().prepareStatement(SelectProductByProductId_SQL);
+			psmt.setInt(1, product_id);
 
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				String pname = rs.getString("pname");
+				String product_name = rs.getString("product_name");
 				int price = rs.getInt("price");
 				String size = rs.getString("size");
 				String category = rs.getString("category");
 				int stock = rs.getInt("stock");
 				int point = rs.getInt("point");
 
-				product = new ProductVO(pid, pname, price, size, category, stock, point);
+				product = new ProductVO(product_id, product_name, price, size, category, stock, point);
 			}
 			rs.close();
 			psmt.close();
@@ -55,9 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<ProductVO> selectProductsByCategory(String category) {
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		List<ProductVO> productList = new ArrayList<>();
+		List<ProductVO> productList = new ArrayList<ProductVO>();
 
 		try {
 			psmt = agent.getCon().prepareStatement(SelectProductsByCategory_SQL);
@@ -66,19 +65,21 @@ public class ProductDAOImpl implements ProductDAO {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-
-				String pname = rs.getString("pname");
+				int product_id = rs.getInt("product_id");
+				String product_name = rs.getString("product_name");
 				int price = rs.getInt("price");
-				int pid = rs.getInt("pid");
+				String size = rs.getString("size");
+				int stock = rs.getInt("stock");
+				int point = rs.getInt("point");
 
-				ProductVO product = new ProductVO(pname, price, pid);
+				ProductVO product = new ProductVO(product_id, product_name, price, size, category, stock, point);
 				productList.add(product);
 			}
 			rs.close();
 			psmt.close();
 		} 
 		catch (SQLException e) {
-			System.err.println("* Product Select Error");
+			System.err.println("* Product Select Error; "+e.getMessage());
 		}
 		return productList;
 	}
@@ -95,19 +96,19 @@ public class ProductDAOImpl implements ProductDAO {
 
 			while (rs.next()) {
 
-				int pid = rs.getInt("pid");
-				String pname = rs.getString("pname");
+				int product_id = rs.getInt("product_id");
+				String product_name = rs.getString("product_name");
 				String size = rs.getString("size");
 				int price = rs.getInt("price");
 				String category = rs.getString("category");
 				int stock = rs.getInt("stock");
 				int point = rs.getInt("point");
 
-				ProductVO product = new ProductVO(pid, pname, price, size, category, stock, point);
+				ProductVO product = new ProductVO(product_id, product_name, price, size, category, stock, point);
 				product_list.add(product);
 			}
 		} catch (SQLException e) {
-			System.err.println("* Product Select Error");
+			System.err.println("* Product Select Error; "+e.getMessage());
 		}
 		return product_list;
 	}
@@ -119,7 +120,7 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		try {
 			psmt = agent.getCon().prepareStatement(INSERT_SQL);
-			psmt.setString(1, product.getPname());
+			psmt.setString(1, product.getProduct_name());
 			psmt.setInt(2, product.getPrice());
 			psmt.setString(3, product.getSize());
 			psmt.setString(4, product.getCategory());
@@ -129,24 +130,24 @@ public class ProductDAOImpl implements ProductDAO {
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.err.println("* Product Insert Error");
+			System.err.println("* Product Insert Error; "+e.getMessage());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public int deleteProduct(int pid) {
+	public int deleteProduct(int product_id) {
 		PreparedStatement psmt = null;
 		int result = 0;
 		
 		try {
 			psmt = agent.getCon().prepareStatement(DELETE_SQL);
-			psmt.setInt(1, pid);
+			psmt.setInt(1, product_id);
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.err.println("* Product Delete Error");
+			System.err.println("* Product Delete Error; "+e.getMessage());
 		}
 		return result;
 	}

@@ -11,10 +11,14 @@ import com.yourcloset.utils.JdbcAgent;
 
 public class UserDAOImpl implements UserDAO {
 	private JdbcAgent agent = null;
-	private String IsUser_SQL = "select id from user;";
-	private String LOGIN_SQL = "SELECT id, md5(pw) FROM user WHERE id = ? AND pw = ?";
-	private String INSERT_SQL = "INSERT INTO user(id,pw,name,address,point,position) VALUES( ? , ? , ? , ? , 0, ?)";
-	private String SelectUserByUserId_SQL = "SELECT id,pw,name,address,point,position FROM user WHERE id = ?";
+	private PreparedStatement psmt = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	
+	private String IsUser_SQL = "SELECT user_id from user;";
+	private String LOGIN_SQL = "SELECT user_id, md5(password) FROM user WHERE user_id = ? AND password = ?";
+	private String INSERT_SQL = "INSERT INTO user VALUES( ? , ? , ? , ? , 0, 'customer')";
+	private String SelectUserByUserId_SQL = "SELECT * FROM user WHERE user_id = ?";
 	private String SelectAll_SQL="SELECT * FROM user WHERE position='customer'";
 	
 	public UserDAOImpl() {
@@ -23,8 +27,6 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public boolean isUser(String userid) {
-		Statement stmt = null;
-		ResultSet rs = null;
 		boolean result = false;
 		try {
 			stmt = agent.getCon().createStatement();
@@ -42,22 +44,21 @@ public class UserDAOImpl implements UserDAO {
 
 	
 	@Override
-	public String login(String userId, String password) {
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
+	public String login(String user_id, String password) {
 		String id = null;
 		try {
 			psmt = agent.getCon().prepareStatement(LOGIN_SQL);
-			psmt.setString(1, userId);
+			psmt.setString(1, user_id);
 			psmt.setString(2, password);
 
 			rs = psmt.executeQuery();
-			if (rs.next()) id = userId;
+			if (rs.next()) id = user_id;
 			
 			rs.close();
 			psmt.close();
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.err.println("* User Login Error");
 		}
 		return id;
@@ -66,15 +67,13 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public int signUp(UserVO user) {
-		PreparedStatement psmt = null;
 		int result = 0;
 		try {
 			psmt = agent.getCon().prepareStatement(INSERT_SQL);
-			psmt.setString(1, user.getId());
+			psmt.setString(1, user.getUser_id());
 			psmt.setString(2, user.getPassword());
-			psmt.setString(3, user.getName());
-			psmt.setString(4, user.getAddress());
-			psmt.setString(5, "customer");
+			psmt.setString(3, user.getUser_name());
+			psmt.setString(4, user.getUser_address());
 			
 			result = psmt.executeUpdate();
 			psmt.close();
@@ -88,8 +87,6 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public UserVO selectUserByUserId(String userId) {
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
 		UserVO user = null;
 		
 		try {
@@ -99,10 +96,10 @@ public class UserDAOImpl implements UserDAO {
 			rs = psmt.executeQuery();
 			
 			if (rs.next()) {
-				String id = rs.getString("id");
-				String pw = rs.getString("pw");
-				String name = rs.getString("name");
-				String address = rs.getString("address");
+				String id = rs.getString("user_id");
+				String pw = rs.getString("password");
+				String name = rs.getString("user_name");
+				String address = rs.getString("user_address");
 				int point = rs.getInt("point");
 				String position = rs.getString("position");
 
@@ -121,7 +118,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int updateUserInfo(String userid, String column, Object value) {
 		String sql = "update user set " + column + " = ? where id=?";
-		PreparedStatement psmt = null;
 		int result = 0;
 		
 		try {
@@ -131,7 +127,8 @@ public class UserDAOImpl implements UserDAO {
 			
 			result = psmt.executeUpdate();
 			psmt.close();
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			System.err.println("* User Update Error");
 		}
 		return result;
@@ -140,8 +137,6 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public List<UserVO> selectAllUser() {
-		Statement stmt = null;
-		ResultSet rs = null;
 		List<UserVO> user_list = new ArrayList<>();
 		
 		try {
@@ -149,10 +144,10 @@ public class UserDAOImpl implements UserDAO {
 			rs = stmt.executeQuery(SelectAll_SQL);
 			
 			while (rs.next()) {
-				String id = rs.getString("id");
-				String password = rs.getString("pw");
-				String name = rs.getString("name");
-				String address = rs.getString("address");
+				String id = rs.getString("user_id");
+				String password = rs.getString("passw");
+				String name = rs.getString("user_name");
+				String address = rs.getString("user_address");
 				int point = rs.getInt("point");
 
 				UserVO user = new UserVO(id, password, name, address, point);
@@ -161,7 +156,8 @@ public class UserDAOImpl implements UserDAO {
 			
 			rs.close();
 			stmt.close();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.err.println("* User Select Error");
 		}
 		return user_list;

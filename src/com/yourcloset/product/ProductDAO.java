@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ProductDAO {
 
-	ProductVO selectProductByPid(int pid);
+	ProductVO selectProductByProductId(int product_id);
 	List<ProductVO> selectProductsByCategory(String category);
 	List<ProductVO> selectProductsAll();
 
 	int insertProduct(ProductVO product);
-	int deleteProduct(int pid);
+	int deleteProduct(int product_id);
 
 }

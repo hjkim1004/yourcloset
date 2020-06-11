@@ -20,6 +20,10 @@ public class BookmarkVO {
 		this.user_id = user_id;
 	}
 
+	public int getBookmarkId() {
+		return bookmark_id;
+	}
+
 	public int getBookmark_id() {
 		return bookmark_id;
 	}
