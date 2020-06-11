@@ -1,81 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="/yourcloset/static/css/productList.css">
-</head>
-<body>
-	<!-- Navigation -->
-	<%@ include file="header.jsp"%>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="main-box clearfix">
-					<div class="table-responsive">
-						<table class="table user-list">
-							<thead>
-								<tr>
-									<th><span>Order Number</span></th>
-									<th><span>Customer ID</span></th>
-									<th><span>Delivery State</span></th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<%
-										SaleDAO Sale = new SaleDAO();
-										List<SaleDTO> salelist = Sale.selectSalesByDeliveryState();
-
-										for (SaleDTO s : salelist) {
-									%>
-									<%
-										out.print("<td class=\"text-center\">" + s.getoId() + "</td>");
-											out.print("<td class=\"text-center\">" + s.getUserId() + "</td>");
-									%>
-									<td><form role="form" action="shippingUpdate.jsp" method="POST">
-											<input type="hidden" name="oid" value="<%=s.getoId()%>" >
-											<select>
-												<%
-													String status = s.getDelivery();
-														if (status.equals("πËº€ øœ∑·")) {
-
-															out.print("<option value='ready'>πËº€ ¡ÿ∫Ò¡ﬂ</option>");
-															out.print("<option value='complete' selected>πËº€ øœ∑·</option>");
-
-														} else {
-															out.print("<option value='ready' selected>πËº€ ¡ÿ∫Ò¡ﬂ</option>");
-															out.print("<option value='complete'>πËº€ øœ∑·</option>");
-														}
-												%>
-											</select>
-											<input type="submit" class="btn btn-sm btn-danger" value="∫Ø∞Ê">
-										</form></td>
-								</tr>
-								<%
-									}
-								%>
-
-							</tbody>
-						</table>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+<%@ include file="manager_header.jsp"%>
+<%
+	OrderDAO orderDAO = new OrderDAOImpl();
+	List<OrderVO> order_list = orderDAO.selectOrdersByDeliveryState();
+	request.setAttribute("order_list", order_list);
+%>
+							<div class="main-box clearfix">
+								<div class="table-responsive">
+									<table class="table user-list">
+										<thead>
+											<!-- order_id, product_id, order_time, address, payment, user_id, delivery, price -->
+											<tr>
+												<th><span>Order Number</span></th>
+												<th><span>Customer ID</span></th>
+												<th><span>Delivery State</span></th>
+												<th>#</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="order" items="${order_list}">
+											<tr>
+												<td>${order.order_id}</td>
+												<td>${order.user_id}</td>
+												<td>${order.delivery}</td>
+												<td>
+													<form action="updateOrder.do" method="post">
+														<input type="hidden" name="oid" value="${order.order_id}">
+														<select class="form-control" id="status">
+															<option value="product_ready">ÏÉÅÌíà Ï§ÄÎπÑÏ§ë</option>
+															<option value="delivery_ready">Î∞∞ÏÜ° Ï§ÄÎπÑÏ§ë</option>
+															<option value="start">Î∞∞ÏÜ° ÏãúÏûë</option>
+															<option value="complete">Î∞∞ÏÜ° ÏôÑÎ£å</option>
+														</select>
+														<input type="submit" class="btn btn-sm btn-danger" value="Î≥ÄÍ≤Ω">
+													</form>
+												</td>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+				<div style="margin-left: 42em;">
+					<button type="submit" id="loginSubmit"
+						class="btn btn-danger loginFormElement"
+						onclick="window.history.back()">Go Back</button>
+					<div style="margin-top: 11em;"></div>
+				</div>
+				<div style="margin-top: 10em;"></div>
 			</div>
 		</div>
 	</div>
-	<div style="margin-left: 42em;">
-		<button type="submit" id="loginSubmit"
-			class="btn btn-danger loginFormElement"
-			onclick="window.history.back()">Go
-			Back</button>
-		<div style="margin-top: 11em;"></div>
-	</div>
-	<div style="margin-top: 10em;"></div>
+</div>
 </body>
 </html>
