@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!-- Navigation -->
-<%@ include file="/nav/header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-<div class="container">
+<%@ include file="/common/header.jsp"%>
+
+<div class="container" style="padding-top: 40px">
 
 	<div class="row">
 		<div class="col-md-6">
@@ -88,7 +88,6 @@
 
 	<div style="margin-top: 3em;"></div>
 </div>
-<!-- Footer -->
 <%@ include file="/common/footer.jsp"%>
 </body>
 </html>

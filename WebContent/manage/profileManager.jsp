@@ -1,132 +1,80 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-	<%@ include file="header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.*, com.yourcloset.utils.*"%>
 
-	<div class="container" style="margin: 50px;">
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
+<%@ include file="manager_header.jsp"%>
 
-					<div class="card-body">
-						<div class="card-title mb-4">
-							<div class="d-flex justify-content-start">
-								<div class="image-container">
-									<img src="/yourcloset/static/img/profileimg_2.png"
-										id="imgProfile" style="width: 150px; height: 150px"
-										class="img-thumbnail" />
-								</div>
-								<div class="userData ml-3">
-									<h2 class="d-block"
-										style="font-size: 1.5rem; font-weight: bold">
-										<a href="javascript:void(0);" style="text-decoration: none;">My
-											page</a>
-									</h2>
-									<h6 class="d-block">
-										°ü¸®ÀÚ :
-										<%=user.getId()%></h6>
+							<div class="tab-content ml-1" id="myTabContent">
+								<div class="tab-pane fade show active" id="profile"
+									role="tabpanel" aria-labelledby="profile-tab">
 
-								</div>
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-12">
-								<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										id="profile" data-toggle="tab" href="/yourcloset/Mypage/profileManager.jsp" role="tab"
-										aria-controls="Profile" aria-selected="true">My Page</a>
-									</li>
-									<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-										<li class="nav-item"><a class="nav-link active"
-											id="customerlist" data-toggle="tab"
-											href="/yourcloset/Mypage/customList.jsp" role="tab"
-											aria-controls="CustomerList" aria-selected="true">Customer
-												List</a></li>
-
-										<li class="nav-item"><a class="nav-link active"
-											id="saleslist" data-toggle="tab"
-											href="/yourcloset/Mypage/saleschart.jsp" role="tab"
-											aria-controls="SalesList" aria-selected="true">Sales List</a>
-										</li>
-										<li class="nav-item"><a class="nav-link active"
-											id="shipping" data-toggle="tab"
-											href="/yourcloset/Mypage/shipping.jsp" role="tab"
-											aria-controls="Shipping" aria-selected="true">Delivery
-												List</a></li>
-										<li class="nav-item"><a class="nav-link active"
-											id="productList" data-toggle="tab"
-											href="/yourcloset/Mypage/productList.jsp" role="tab"
-											aria-controls="ProductList" aria-selected="true">Product
-												List</a></li>
-
-
-									</ul>
-								</ul>
-								<div class="tab-content ml-1" id="myTabContent">
-									<div class="tab-pane fade show active" id="profile"
-										role="tabpanel" aria-labelledby="profile-tab">
-
-										<div class="row">
-											<div class="col-sm-3 col-md-2 col-5">
-												<label style="font-weight: bold;">ID</label>
-											</div>
-											<div class="col-md-8 col-6">
-												<%= user.getId() %>
-												<!--id ÀÔ·Â-->
-											</div>
+									<div class="row">
+										<div class="col-sm-3 col-md-2 col-5">
+											<label style="font-weight: bold;">ID</label>
 										</div>
-										<hr />
-
-										<div class="row">
-											<div class="col-sm-3 col-md-2 col-5">
-												<label style="font-weight: bold;">NAME</label>
-											</div>
-											<div class="col-md-8 col-6">
-												<%= user.getName() %>
-												<!--ÀÌ¸§ ÀÔ·Â-->
-											</div>
+										<div class="col-md-8 col-6">
+											${user.user_id}
+											<!--id ìž…ë ¥-->
 										</div>
-										<hr />
-										<div class="row">
-											<div class="col-sm-3 col-md-2 col-5">
-												<label style="font-weight: bold;">ADDRESS</label>
-											</div>
-											<div class="col-md-8 col-6">
-												<%= user.getAddress() %>
-												<!--ÁÖ¼ÒÀÔ·Â-->
-											</div>
-										</div>
-										<hr />
-										<div class="row">
-											<div class="col-sm-3 col-md-2 col-5">
-												<label style="font-weight: bold;">POINT</label>
-											</div>
-											<div class="col-md-8 col-6">
-											<%= user.getPoint() %><!--Æ÷ÀÎÆ® ÀÔ·Â-->
-											</div>
-										</div>
-
-
 									</div>
+									<hr />
+									
+									<div class="row">
+										<div class="col-sm-3 col-md-2 col-5">
+											<label style="font-weight: bold;">PASSWORD</label>
+										</div>
+										<div class="col-md-8 col-6">
+											${user.password}
+											<!--id ìž…ë ¥-->
+										</div>
+									</div>
+									<hr />
+
+									<div class="row">
+										<div class="col-sm-3 col-md-2 col-5">
+											<label style="font-weight: bold;">NAME</label>
+										</div>
+										<div class="col-md-8 col-6">
+											${user.user_name}
+											<!--ì´ë¦„ ìž…ë ¥-->
+										</div>
+									</div>
+									<hr />
+									
+									<div class="row">
+										<div class="col-sm-3 col-md-2 col-5">
+											<label style="font-weight: bold;">ADDRESS</label>
+										</div>
+										<div class="col-md-8 col-6">
+											${user.user_address }
+										</div>
+									</div>
+									<hr />
+									<div class="row">
+										<div class="col-sm-3 col-md-2 col-5">
+											<label style="font-weight: bold;">POINT</label>
+										</div>
+										<div class="col-md-8 col-6">
+											${user.point }
+											<!--í¬ì¸íŠ¸ ìž…ë ¥-->
+										</div>
+									</div>
+
+
 								</div>
+								<div class="tab-pane fade" id="other-services" role="tabpanel"
+									aria-labelledby="oher-services">Facebook, Google, Twitter
+									Account that are connected to this account</div>
 							</div>
 						</div>
-
-
 					</div>
 
+
 				</div>
+
 			</div>
 		</div>
-
 	</div>
-</body>
-</html>
+
+</div>
+<%@ include file="/common/footer.jsp"%>

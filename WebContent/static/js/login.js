@@ -1,60 +1,58 @@
-$('.js-tilt').tilt({
-			scale: 1.1
-		})
+(function($) {
+	"use strict";
 
-(function ($) {
-    "use strict";
+	/*
+	 * ================================================================== [
+	 * Validate ]
+	 */
+	var input = $('.validate-input .input100');
 
+	$('.validate-form').on('submit', function() {
+		var check = true;
 
-    /*==================================================================
-    [ Validate ]*/
-    var input = $('.validate-input .input100');
+		for (var i = 0; i < input.length; i++) {
+			if (validate(input[i]) == false) {
+				showValidate(input[i]);
+				check = false;
+			}
+		}
 
-    $('.validate-form').on('submit',function(){
-        var check = true;
+		return check;
+	});
 
-        for(var i=0; i<input.length; i++) {
-            if(validate(input[i]) == false){
-                showValidate(input[i]);
-                check=false;
-            }
-        }
+	$('.validate-form .input100').each(function() {
+		$(this).focus(function() {
+			hideValidate(this);
+		});
+	});
 
-        return check;
-    });
+	function validate(input) {
+		if ($(input).attr('type') == 'email'
+				|| $(input).attr('name') == 'email') {
+			if ($(input)
+					.val()
+					.trim()
+					.match(
+							/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+				return false;
+			}
+		} else {
+			if ($(input).val().trim() == '') {
+				return false;
+			}
+		}
+	}
 
+	function showValidate(input) {
+		var thisAlert = $(input).parent();
 
-    $('.validate-form .input100').each(function(){
-        $(this).focus(function(){
-           hideValidate(this);
-        });
-    });
+		$(thisAlert).addClass('alert-validate');
+	}
 
-    function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                return false;
-            }
-        }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
-    }
+	function hideValidate(input) {
+		var thisAlert = $(input).parent();
 
-    function showValidate(input) {
-        var thisAlert = $(input).parent();
-
-        $(thisAlert).addClass('alert-validate');
-    }
-
-    function hideValidate(input) {
-        var thisAlert = $(input).parent();
-
-        $(thisAlert).removeClass('alert-validate');
-    }
-
-
+		$(thisAlert).removeClass('alert-validate');
+	}
 
 })(jQuery);

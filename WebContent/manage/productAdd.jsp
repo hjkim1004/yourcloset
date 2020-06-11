@@ -1,13 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-
-<!DOCTYPE html>
-<html>
-<body>
-	<!-- Navigation -->
-	<%@ include file="header.jsp"%>
-
-	<div class="container">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="manager_header.jsp"%>
 
 		<div class="row">
 			<div class="col-md-6">
@@ -18,62 +11,48 @@
 		<div class="row">
 
 			<div class="col-md-6">
-				<form action="productList.jsp" role="form">
-
-					<select class="form-control" id="productSelect">
-						<option>PleaseSelect a Product Group</option>
-						<option>Top</option>
-						<option>Bottom</option>
-						<option>One-piece</option>
-						<option>Acc</option>
-					</select>
-
+				<form action="addProduct.do" role="form" method="POST">
 					<div class="form-group">
-						<label for="productname" class="productFormElement">Product
-							Name : </label> <input class="form-control" id="productname" type="text">
+						<label for="productname" class="productFormElement">Product Category : </label> 
+						<select class="form-control" id="category">
+							<option>Please Select a Product Group</option>
+							<option id="top">Top</option>
+							<option id="bottom">Bottom</option>
+							<option id="one-piece">One-piece</option>
+							<option id="acc">Acc</option>
+						</select>
 					</div>
 
 					<div class="form-group">
-						<label for="productprice" class="productFormElement">Product
-							Price : </label> <input class="form-control" id="productprice"
-							type="text">
+						<label for="productname" class="productFormElement">Product Name : </label> 
+						<input class="form-control" id="product_name" type="text">
 					</div>
 
 					<div class="form-group">
-						<label for="productsize" class="productFormElement">Product
-							Size : </label> <input class="form-control" id="productsize" type="text">
+						<label for="productprice" class="productFormElement">Product Price : </label> 
+						<input class="form-control" id="price" type="text">
 					</div>
 
 					<div class="form-group">
-						<label for="productcolor" class="productFormElement">Product
-							Color : </label> <input class="form-control" id="productcolor"
-							type="text">
+						<label for="productsize" class="productFormElement">Product Size : </label> 
+						<input class="form-control" id="size" type="text">
 					</div>
 
 					<div class="form-group">
-						<label for="productstock" class="productFormElement">Product
-							Stock : </label> <input class="form-control" id="productstock"
-							type="text">
+						<label for="productstock" class="productFormElement">Product Stock : </label> 
+						<input class="form-control" id="stock" type="text">
 					</div>
 
 					<div class="form-group">
-						<label class="loginformelement" for="productdescription">Product
-							Description</label> <input id="productdescription"
-							class="form-control input-lg" placeholder="Large" type="text">
-						<div class="container"></div>
-
-						<div class="form-group">
-
-							<label class="control-label">Product Image</label> <input
-								class="filestyle" data-icon="false" type="file">
-
-						</div>
-
-
-						<button type="submit" id="loginSubmit"
-							class="btn btn-danger loginFormElement">Add Product</button>
-
+						<label class="loginformelement" for="productdescription">Product Description : </label> 
+						<input id="description" class="form-control input-lg" placeholder="Large" type="text">
 					</div>
+
+					<div class="form-group">
+						<label class="control-label">Product Image : </label> 
+						<input class="filestyle" data-icon="false" type="file">
+					</div>
+					<button type="submit" id="loginSubmit" class="btn btn-danger loginFormElement">Add Product</button>
 				</form>
 
 			</div>

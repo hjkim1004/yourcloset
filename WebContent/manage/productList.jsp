@@ -1,88 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<body>
-	<!-- Navigation -->
-	<%@ include file="header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/yourcloset/static/css/productList.css">
+<%
+	ProductDAO product = new ProductDAOImpl();
+	List<ProductVO> product_list = product.selectProductsAll();
+	request.setAttribute("product_list", product_list);
+%>
+<%@ include file="manager_header.jsp"%>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="main-box clearfix">
-					<div class="table-responsive">
-						<table class="table user-list">
-							<thead>
-								<tr>
-									<th><span>Product Name</span></th>
-									<th><span>Product Number</span></th>
-									<th class="text-center"><span>size</span></th>
-									<th><span>Category</span></th>
-									<th><span>Stock</span></th>
-									<th><span>Point</span></th>
-									<td class="text-center"><button
-											class="btn btn-sm btn-danger"
-											onclick="location.href='productAdd.jsp'">ªÛ«∞ √ﬂ∞°</button></td>
-								</tr>
-							</thead>
-							<tbody>
-
-								<%
-									ProductDAO product = new ProductDAO();
-									List<ProductDTO> productlist = product.selectProductsAll();
-
-									for (ProductDTO p : productlist) {
-										out.print("<tr>");
-										out.print("<td>");
-										out.print("<img src=/yourcloset/static/img/" + p.getPid() + ".jpg width='200' height='250'>");
-										out.print("<a href=\"#\" class=\"user-link\">" + p.getPname() + "</a>"); //ªÛ«∞¿Ã∏ß
-										out.print("<span class=\"user-subhead\">" + p.getPrice() + "</span>"); //∞°∞›
-										out.print("</td>");
-
-										out.print("<td>");
-										out.print(p.getPid());
-										out.print("</td>");
-
-										out.print("<td>");
-										out.print(p.getSize());
-										out.print("</td>");
-
-										out.print("<td>");
-										out.print(p.getCategory());
-										out.print("</td>");
-
-										out.print("<td>");
-										out.print(p.getStock());
-										out.print("</td>");
-
-										out.print("<td>");
-										out.print(p.getPoint());
-										out.print("</td>");
-
-										out.print("<td>");
-										%>
-										<form action="productList_del.jsp" method="POST">
-											<input type="hidden" name="bid" value="<%=p.getPid()%>">
-											<input type="submit" class="btn btn-sm btn-danger" value="ªË¡¶">
-										</form>
-									</td>
-									<%}
-									out.println("</tr>");
-								%>
-							</tbody>
-						</table>
+							<div class="main-box clearfix">
+								<div class="table-responsive">
+									<table class="table user-list">
+										<thead>
+											<tr>
+												<th><span>Product Name</span></th>
+												<th><span>Price</span></th>
+												<th class="text-center"><span>size</span></th>
+												<th><span>Category</span></th>
+												<th><span>Stock</span></th>
+												<th><span>Point</span></th>
+												<td class="text-center"><button
+														class="btn btn-sm btn-danger"
+														onclick="location.href='productAdd.jsp'">ÏÉÅÌíà Ï∂îÍ∞Ä</button></td>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${product_list}">
+											<tr>
+												<td>
+													<a href="${path}/productDetail.do?id=${product.product_id}" class="user-link">
+													<img src="/yourcloset/static/img/${product.product_id}.jpg" alt="${product.product_name}" width="300" height="450"/>
+													</a>
+												</td>
+												<td>
+													<span class="user-subhead">${product.price }</span>
+												</td>
+												<td>${product.product_id }</td>
+												<td>${product.size }</td>
+												<td>${product.category }</td>
+												<td>${product.stock }</td>
+												<td>
+												<form action="${path}/delProduct.do" method="POST">
+													<input type="hidden" name="product_id" value="${product.product_id }">
+													<input type="submit" class="btn btn-sm btn-danger" value="ÏÇ≠Ï†ú">
+												</form>
+												</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+				<div style="margin-left: 42em;">
+					<button type="submit" id="loginSubmit"
+						class="btn btn-danger loginFormElement"
+						onclick="window.history.back()">Go Back</button>
+					<div style="margin-top: 11em;"></div>
+				</div>
+				<div style="margin-top: 8em;"></div>
 			</div>
 		</div>
 	</div>
-	<div style="margin-left: 42em;">
-		<button type="submit" id="loginSubmit"
-			class="btn btn-danger loginFormElement"
-			onclick="window.history.back()">Go
-			Back</button>
-		<div style="margin-top: 11em;"></div>
-	</div>
-	<div style="margin-top: 8em;"></div>
-</body>
-</html>
+</div>
+<%@include file="/common/footer.jsp"%>
