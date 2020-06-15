@@ -6,6 +6,7 @@
 
 <%
 	UserVO user = (UserVO) session.getAttribute("user");
+	System.out.println(user);
 %>
 <c:set var="user" value="${user}" />
 
@@ -41,7 +42,7 @@
 						href="${path}/index.jsp">Home <span class="sr-only">(current)</span></a>
 					</li>
 					<c:choose>
-						<c:when test="${empty session or empty user}">
+						<c:when test="${session == null or user == null}">
 							<li class="nav-item"><a class="nav-link"
 								href="${path}/login.jsp">Login</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -51,7 +52,7 @@
 							<li class="nav-item"><a class="nav-link"
 								href="${path}/logout.do">Logout</a></li>
 							<li><c:if test="${user.position eq 'staff'}">
-									<a class="nav-link" href="${path}/mypage/profileManager.jsp">My
+									<a class="nav-link" href="${path}/mypage/profileManager.jsp">Manage
 										Page</a>
 								</c:if> <c:if test="${user.position eq 'customer'}">
 									<a class="nav-link" href="${path}/mypage/profile.jsp">My

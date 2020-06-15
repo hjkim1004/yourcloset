@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 public class ControllerAction extends HttpServlet {
@@ -31,14 +30,17 @@ public class ControllerAction extends HttpServlet {
 			try {
 				Class commandClass = Class.forName(className); // 해당 문자열을 클래스로
 				Object commandInstance = commandClass.newInstance(); // 해당 클래스의 객체 생성
+				
 				commandMap.put(command, commandInstance); // Map 객체인 commandMap에 객체 저장
-			} catch (ClassNotFoundException e) {
-				continue; // error
-				// throw new ServletException(e);
-			} catch (InstantiationException e) {
+			} 
+			catch (ClassNotFoundException e) {
+				System.err.println("* Class Not Found; " + e.getMessage());
+			} 
+			catch (InstantiationException e) {
 				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+			} 
+			catch (IllegalAccessException e) {
+				System.err.println("* Illegal Acess; " + e.getMessage());
 			}
 		}
 	}
