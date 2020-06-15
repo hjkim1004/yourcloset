@@ -10,8 +10,8 @@ import com.yourcloset.utils.JdbcAgent;
 
 public class BookmarkDAOImpl implements BookmarkDAO {
 	private JdbcAgent agent = null;
-	private String INSERT_SQL = "insert into bookmark(pid, userid) values(?,?);";
-	private String SelectBookmarkByUserId_SQL = "SELECT * FROM bookmark WHERE userid = ? order by bookmark_id";
+	private String INSERT_SQL = "INSERT INTO bookmark VALUES(NULL, ?,?);";
+	private String SelectBookmarkByUserId_SQL = "SELECT * FROM bookmark WHERE user_id = ? ORDER BY bookmark_id";
 	
 	public BookmarkDAOImpl() {
 		agent = new JdbcAgent();
@@ -41,7 +41,7 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 			psmt.close();
 		} 
 		catch (Exception e) {
-			System.err.println("* Bookmark Select Error");
+			System.err.println("* Bookmark Select Error; " + e.getMessage());
 		}
 		return bookmark_list;
 	}
@@ -60,7 +60,7 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 			psmt.close();
 		} 
 		catch (SQLException e) {
-			System.err.println("* Bookmark Insert Error");
+			System.err.println("* Bookmark Insert Error; " + e.getMessage());
 		}
 		return result;
 	}
@@ -79,7 +79,7 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 			psmt.close();
 		} 
 		catch(SQLException e) {
-			System.err.println("* Bookmark Delete Error");
+			System.err.println("* Bookmark Delete Error; " + e.getMessage());
 		}
 		return result;
 	}

@@ -19,12 +19,12 @@ public class OrderDAOImpl implements OrderDAO {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 
-	private String SelectDelivery_SQL = "select product_id, delivery from orders where order_id =?";
+	private String SelectDelivery_SQL = "SELECT product_id, delivery FROM orders WHERE order_id =?";
 	private String SelectOrders_SQL = "SELECT * FROM product p, orders s WHERE p.product_id = s.product_id";
 	private String SelectOrdersByUserId_SQL = "SELECT * FROM product p, orders s WHERE p.product_id = s.product_id AND s.user_id = ?";
 	private String INSERT_SQL = "INSERT INTO orders(product_id, address, payment, user_id, delivery, price, order_time) VALUES (?,?,?,?,?,?, sysdate())";
-	private String DELETE_SQL = "delete from orders where order_id = ?";
-	private String SelectOrderStatus_SQL = "select product_id, count(order_id) as cnt from orders group by product_id;";
+	private String DELETE_SQL = "DELETE FROM orders WHERE order_id = ?";
+	private String SelectOrderStatus_SQL = "SELECT product_id, count(order_id) as cnt FROM orders GROUP BY product_id;";
 
 	public OrderDAOImpl() {
 		agent = new JdbcAgent();

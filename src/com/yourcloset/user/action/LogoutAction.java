@@ -13,7 +13,7 @@ public class LogoutAction implements CommandAction {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		session = null;
-		return null;
+		return "index.jsp";
 	}
 
 }

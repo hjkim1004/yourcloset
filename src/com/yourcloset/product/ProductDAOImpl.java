@@ -17,8 +17,8 @@ public class ProductDAOImpl implements ProductDAO {
 	private String SelectProductsByCategory_SQL = "SELECT * FROM product WHERE category = ?";
 	private String SelectProductByProductId_SQL = "SELECT * FROM product WHERE product_id = ?";
 	private String SelectProductsAll_SQL = "SELECT * FROM product";
-	private String INSERT_SQL = "insert into product(product_name, price, size, category, stock, point) values(?,?,?,?,?,?)";
-	private String DELETE_SQL = "delete from product where product_id=?";
+	private String INSERT_SQL = "INSERT INTO product(product_name, price, size, category, stock, point) VALUES(?,?,?,?,?,?)";
+	private String DELETE_SQL = "DELETE FROM product WHERE product_id=?";
 	
 	public ProductDAOImpl() {
 		agent = new JdbcAgent();
