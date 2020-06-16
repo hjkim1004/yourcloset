@@ -1,6 +1,8 @@
-package com.yourcloset.user;
+package com.yourcloset.user.dao;
 
 import java.util.List;
+
+import com.yourcloset.user.vo.UserVO;
 
 public interface UserDAO {
 

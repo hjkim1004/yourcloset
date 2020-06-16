@@ -1,4 +1,4 @@
-package com.yourcloset.order;
+package com.yourcloset.order.vo;
 
 import java.util.Date;
 

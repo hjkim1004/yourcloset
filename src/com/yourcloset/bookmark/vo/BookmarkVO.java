@@ -1,4 +1,4 @@
-package com.yourcloset.bookmark;
+package com.yourcloset.bookmark.vo;
 
 public class BookmarkVO {
 	private int bookmark_id;

@@ -1,4 +1,4 @@
-package com.yourcloset.product;
+package com.yourcloset.product.dao;
 
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yourcloset.product.vo.ProductVO;
 import com.yourcloset.utils.JdbcAgent;
 
 public class ProductDAOImpl implements ProductDAO {

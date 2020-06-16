@@ -1,4 +1,4 @@
-package com.yourcloset.user.action;
+package com.yourcloset.user.controller;
 
 import java.io.PrintWriter;
 
@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import com.yourcloset.controller.CommandAction;
 import com.yourcloset.user.*;
+import com.yourcloset.user.dao.UserDAO;
+import com.yourcloset.user.dao.UserDAOImpl;
+import com.yourcloset.user.vo.UserVO;
 import com.yourcloset.utils.MD5;
 
 public class LoginAction implements CommandAction {
@@ -29,18 +32,17 @@ public class LoginAction implements CommandAction {
 			session.setAttribute("user", user);
 			
 			out.println("alert('로그인 성공! 사용자 페이지로 이동합니다.')");
-			out.println("</script></head></html>");
-
 			if (user.getPosition().equals("customer"))
-				return "/mypage/profile.jsp"; 
-			else return "/manage/profileManager.jsp";
+				out.println("location.href='/yourcloset/mypage/profile.jsp'");
+			else out.println("location.href='/yourcloset/manage/profileManager.jsp'");
 
 		} else{
 			out.println("alert(' 로그인 실패! 로그인 페이지로 이동합니다. ')");
 			out.println("location.href='login.jsp'");	
-			out.println("</script></head></html>");
-			return "login.jsp";
 		}
+		out.println("</script></head></html>");
+		out.flush();
+		return null;
 	}
 
 }

@@ -1,10 +1,12 @@
-package com.yourcloset.order.action;
+package com.yourcloset.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yourcloset.controller.CommandAction;
 import com.yourcloset.order.*;
+import com.yourcloset.order.dao.OrderDAO;
+import com.yourcloset.order.dao.OrderDAOImpl;
 
 public class UpdateOrderAction implements CommandAction{
 

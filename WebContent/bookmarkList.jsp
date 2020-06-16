@@ -3,35 +3,40 @@
 <%@include file="/common/header.jsp"%>
 <%
 	BookmarkDAO bookmarkDAO = new BookmarkDAOImpl();
-	List<BookmarkVO> bookmark_list = bookmarkDAO.selectBookmarkByUserId(user.getUser_id());
+	Map<BookmarkVO, ProductVO> bookmarkMap = bookmarkDAO.selectBookmarkByUserId(user.getUser_id());
 	
-	ProductDAO productDAO = new ProductDAOImpl();
-	request.setAttribute("bookmark_list", bookmark_list);
+	request.setAttribute("bookmarkMap", bookmarkMap);
 %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
+			<div class="sec-title">
+				<br />
+				<h2>BOOKMARK LIST</h2>
+				<br />
+
+			</div>
 			<div class="main-box clearfix">
 				<div class="table-responsive">
 					<table class="table user-list">
 						<thead>
 							<tr>
 								<th><span>Product Name</span></th>
-								<th><span>Product Number</span></th>
-								<th><span>Bookmark Number</span></th>
+								<th><span>#</span></th>
 
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="bookmark" items="${bookmark_list}">
+							<c:forEach var="entry" items="${bookmarkMap}">
 								<tr>
-									<td><img src="/yourcloset/static/img/${bookmark.product_id}.jpg" />
-										<a href="#" class="user-link">${bookmark.user_id}</a></td>
-									<td>{bookmark.product_id}</td>
-									<td class='text-center'>
-										<form action="bookmark_del.jsp" method="GET">
-											<input type="hidden" name="bookmark_id" value="${bookmark.product_id}"> 
+									<td>
+										<a href="productDetail.jsp?pid=${entry.key.product_id}" class="user-link">
+										${entry.value.product_name}</a>
+									</td>
+									<td>
+										<form action="delBookmark.do" method="POST">
+											<input type="hidden" name="bid" value="${entry.key.bookmark_id}"> 
 											<input type="submit" class="btn btn-sm btn-danger" value="삭제">
 										</form>
 									</td>

@@ -1,4 +1,4 @@
-package com.yourcloset.product;
+package com.yourcloset.product.vo;
 
 public class ProductVO {
 	private int product_id;

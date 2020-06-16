@@ -1,4 +1,4 @@
-package com.yourcloset.user;
+package com.yourcloset.user.vo;
 
 public class UserVO {
 	private String user_id;

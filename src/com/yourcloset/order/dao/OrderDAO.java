@@ -1,9 +1,10 @@
-package com.yourcloset.order;
+package com.yourcloset.order.dao;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.yourcloset.product.ProductVO;
+import com.yourcloset.order.vo.OrderVO;
+import com.yourcloset.product.vo.ProductVO;
 
 public interface OrderDAO {
 

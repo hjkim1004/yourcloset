@@ -17,6 +17,7 @@
 <body>
 	<div class="container" style="margin: 20px;">
 		<br>
+		<h2>PRODUCT DETAILS</h2>
 		<hr>
 		<div class="card">
 			<div class="row">
@@ -25,14 +26,14 @@
 						<div class="img-big-wrap">
 							<div>
 								<a href="#">
-								<img src="/yourcloset/static/img/${product.product_id}.jpg" width="420" style="margin-top: 1em; margin-left: 1em;"></a>
+								<img src="/yourcloset/static/img/${product.product_id}.jpg" width="90%" style="margin-top: 1em; margin-left: 1em;"></a>
 							</div>
 						</div>
 					</article>
 				</aside>
 				<aside class="col-sm-7">
 					<article class="card-body p-5">
-						<h3 class="title mb-3">${product.product_name}</h3>
+						<h3 class="title mb-3"> <span class="glyphicon glyphicon-star-empty" aria-hidden="true">${product.product_name}</span></h3>
 
 						<p class="price-detail-wrap">
 							<span class="price h3 text-warning"> <span class="num">${product.price }</span>
@@ -69,7 +70,7 @@
 						</div>
 						<hr>
 						<a href="payment.jsp" class="btn btn-lg btn-danger text-uppercase"> 바로구매하기 </a> 
-						<a href="addBookmark.do?id=${bookmark.bookmark_id}" class="btn btn-lg btn-outline-primary text-uppercase"> 
+						<a href="addBookmark.do?pid=${product.product_id}" class="btn btn-lg btn-primary text-uppercase"> 
 							<i class="fas fa-shopping-cart"></i> 즐겨찾기 추가
 						</a>
 					</article>

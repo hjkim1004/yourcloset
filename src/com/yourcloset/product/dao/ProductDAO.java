@@ -1,6 +1,8 @@
-package com.yourcloset.product;
+package com.yourcloset.product.dao;
 
 import java.util.List;
+
+import com.yourcloset.product.vo.ProductVO;
 
 public interface ProductDAO {
 

@@ -1,11 +1,11 @@
-package com.yourcloset.bookmark.action;
+package com.yourcloset.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yourcloset.controller.CommandAction;
 
-public class AddBookmarkAction implements CommandAction {
+public class DeleteOrderAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {

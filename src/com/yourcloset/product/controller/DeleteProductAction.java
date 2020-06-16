@@ -1,4 +1,4 @@
-package com.yourcloset.product.action;
+package com.yourcloset.product.controller;
 
 import java.io.PrintWriter;
 
@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yourcloset.controller.CommandAction;
-import com.yourcloset.product.ProductDAO;
-import com.yourcloset.product.ProductDAOImpl;
+import com.yourcloset.product.dao.ProductDAO;
+import com.yourcloset.product.dao.ProductDAOImpl;
 
 public class DeleteProductAction implements CommandAction {
 

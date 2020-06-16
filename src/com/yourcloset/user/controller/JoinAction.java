@@ -1,4 +1,4 @@
-package com.yourcloset.user.action;
+package com.yourcloset.user.controller;
 
 import java.io.PrintWriter;
 
@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yourcloset.controller.CommandAction;
 import com.yourcloset.user.*;
+import com.yourcloset.user.dao.UserDAO;
+import com.yourcloset.user.dao.UserDAOImpl;
+import com.yourcloset.user.vo.UserVO;
 import com.yourcloset.utils.*;
 
 public class JoinAction implements CommandAction {
@@ -23,14 +26,16 @@ public class JoinAction implements CommandAction {
 		String address = request.getParameter("address");
 
 		user = new UserVO(id, password, name, address);
+
+		out.println("<html><head><script>");
 		if(userDAO.signUp(user) > 0){
-			out.println("<html><head><script>alert('회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.');</script></head></html>");
-			return "login.jsp";
+			out.println("alert('회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.');");
 		} 
 		else {
-			out.println("<html><head><script>alert('회원가입에 실패하였습니다.');</script></head></html>");
-			return null;
+			out.println("alert('회원가입에 실패하였습니다.');");
 		}
+		out.println("</script></head></html>");
+		return "login.jsp";
 	}
 
 }

@@ -49,11 +49,11 @@
 				<c:forEach items="${product_list}" var="product">
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
-							<a href="${path}/productDetail.jsp?id=${product.product_id}">
+							<a href="${path}/productDetail.jsp?pid=${product.product_id}">
 								<img class="card-img-top" src="/yourcloset/static/img/${product.product_id}.jpg" alt="\"></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="${path}/productDetail.jsp?id=${product.product_id}">${product.product_name}</a>
+									<a href="${path}/productDetail.jsp?pid=${product.product_id}">${product.product_name}</a>
 								</h4>
 								<h5>${product.price}</h5>
 							</div>

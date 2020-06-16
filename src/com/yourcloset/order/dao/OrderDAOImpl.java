@@ -1,4 +1,4 @@
-package com.yourcloset.order;
+package com.yourcloset.order.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +9,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.yourcloset.order.vo.OrderVO;
 import com.yourcloset.product.*;
+import com.yourcloset.product.dao.ProductDAO;
+import com.yourcloset.product.dao.ProductDAOImpl;
+import com.yourcloset.product.vo.ProductVO;
 import com.yourcloset.utils.JdbcAgent;
 
 public class OrderDAOImpl implements OrderDAO {
